@@ -1,1 +1,664 @@
-1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simplicity Sites</title>
+  <style>
+    :root {
+      --bg: #f7f8f9;
+      --surface: #ffffff;
+      --text: #1f2933;
+      --muted: #5b6875;
+      --line: #d9e2ec;
+      --primary: #174a7c;
+      --primary-dark: #123a61;
+      --accent: #eef5fb;
+      --good: #edf8f1;
+      --bad: #fff3f1;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      background: rgba(247, 248, 249, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(217, 226, 236, 0.8);
+      z-index: 20;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover { background: var(--primary-dark); }
+
+    .btn-secondary {
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    section { padding: 72px 0; }
+
+    .hero {
+      padding: 80px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      background: var(--accent);
+      color: var(--primary);
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3 { line-height: 1.1; margin: 0 0 16px; }
+
+    h1 {
+      font-size: clamp(2.3rem, 5vw, 4.4rem);
+      letter-spacing: -1.5px;
+      max-width: 11ch;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      letter-spacing: -0.8px;
+      max-width: 18ch;
+    }
+
+    .hero p,
+    .section-intro,
+    .card p,
+    .about-text,
+    .pricing-note,
+    .contact-copy {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .hero-card,
+    .panel,
+    .pricing-card,
+    .example-card,
+    .about-card,
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 28px;
+    }
+
+    .mini-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    .score-list {
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .score-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--text);
+    }
+
+    .score-list li span {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .two-panels {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .panel { padding: 28px; }
+    .panel.bad { background: var(--bad); }
+    .panel.good { background: var(--good); }
+
+    .panel ul,
+    .pricing-card ul,
+    .example-card ul {
+      margin: 18px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .result {
+      margin-top: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      background: var(--accent);
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .example-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .example-visual {
+      min-height: 300px;
+      background: linear-gradient(135deg, #dcebf8, #f9fbfd);
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      border-right: 1px solid var(--line);
+    }
+
+    .mock-browser {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .mock-top {
+      background: #eef2f6;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .mock-body {
+      padding: 22px;
+    }
+
+    .mock-tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .mock-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .mock-lines {
+      display: grid;
+      gap: 9px;
+      margin: 16px 0 18px;
+    }
+
+    .mock-lines div {
+      height: 10px;
+      background: #e7edf3;
+      border-radius: 999px;
+    }
+
+    .mock-lines div:nth-child(2) { width: 82%; }
+    .mock-lines div:nth-child(3) { width: 68%; }
+
+    .mock-btn {
+      display: inline-block;
+      padding: 11px 16px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .example-copy {
+      padding: 34px;
+    }
+
+    .pricing-grid,
+    .contact-grid,
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .pricing-card,
+    .about-card,
+    .contact-card { padding: 30px; }
+
+    .price {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin: 8px 0 4px;
+    }
+
+    .price-sub {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .contact-item {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .footer {
+      padding: 28px 0 44px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .two-panels,
+      .steps,
+      .example-card,
+      .pricing-grid,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .example-visual { border-right: 0; border-bottom: 1px solid var(--line); }
+      .nav-links a:not(.btn) { display: none; }
+      .section-head { display: block; }
+    }
+
+    @media (max-width: 640px) {
+      section { padding: 56px 0; }
+      .hero { padding: 56px 0 28px; }
+      .hero-card,
+      .panel,
+      .card,
+      .pricing-card,
+      .example-copy,
+      .about-card,
+      .contact-card { padding: 22px; }
+      .btn { width: 100%; text-align: center; }
+      .hero-actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">Simplicity Sites</div>
+      <nav class="nav-links">
+        <a href="#example">Example</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="btn btn-primary">Get Started</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Simple websites for local service businesses</div>
+          <h1>When Customers Look You Up, Make a Great First Impression</h1>
+          <p>
+            Simple professional websites that help local customers find you, trust you, and contact you easily.
+          </p>
+          <p>
+            Most customers search online before calling a business. A Simplicity Site helps you look professional and easy to contact.
+          </p>
+          <div class="hero-actions">
+            <a href="#example" class="btn btn-primary">See an Example</a>
+            <a href="#contact" class="btn btn-secondary">Contact Leo</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div class="mini-label">Quick first impression check</div>
+          <h3>Could a customer quickly figure out what you do and how to contact you?</h3>
+          <ul class="score-list">
+            <li><span>✓</span> Clear services</li>
+            <li><span>✓</span> Professional presentation</li>
+            <li><span>✓</span> Easy contact info</li>
+            <li><span>✓</span> Mobile-friendly layout</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>What Do Customers See When They Look You Up?</h2>
+            <p class="section-intro">
+              Those first few seconds shape how trustworthy and professional your business feels.
+            </p>
+          </div>
+        </div>
+
+        <div class="two-panels">
+          <div class="panel bad">
+            <h3>Weak First Impression</h3>
+            <ul>
+              <li>No website or an outdated one</li>
+              <li>Hard to find phone number or contact details</li>
+              <li>Little information about services</li>
+              <li>Looks neglected or unclear on mobile</li>
+            </ul>
+            <div class="result">Result: customers may move on to another business.</div>
+          </div>
+
+          <div class="panel good">
+            <h3>Strong First Impression</h3>
+            <ul>
+              <li>Clean professional website</li>
+              <li>Clear services and business information</li>
+              <li>Easy call, message, or booking options</li>
+              <li>Fast, mobile-friendly experience</li>
+            </ul>
+            <div class="result">Result: customers feel confident contacting you.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>How Simplicity Sites Works</h2>
+            <p class="section-intro">
+              No tech stress. No complicated process. Just a clean, simple path from idea to launch.
+            </p>
+          </div>
+        </div>
+
+        <div class="steps">
+          <div class="card">
+            <div class="step-number">1</div>
+            <h3>Share Your Business Details</h3>
+            <p>Tell me about your services, your location, and the best way for customers to contact you.</p>
+          </div>
+
+          <div class="card">
+            <div class="step-number">2</div>
+            <h3>We Build Your Simplicity Site</h3>
+            <p>A clean one-page website designed to help customers find you on Google and reach you quickly.</p>
+          </div>
+
+          <div class="card">
+            <div class="step-number">3</div>
+            <h3>Make a Better First Impression</h3>
+            <p>When people look you up, they see a professional business that is easy to trust and easy to contact.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="example">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Example Simplicity Site</h2>
+            <p class="section-intro">
+              Here is the kind of clean, focused website a local business can use to look more professional online.
+            </p>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-visual">
+            <div class="mock-browser">
+              <div class="mock-top">duluthskinspa.com</div>
+              <div class="mock-body">
+                <div class="mock-tag">Example Site</div>
+                <div class="mock-title">Duluth Skin Spa</div>
+                <div class="mock-lines">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <div class="mock-btn">Book Appointment</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="example-copy">
+            <div class="mini-label">Featured example</div>
+            <h3>Duluth Skin Spa</h3>
+            <p>
+              A simple, clean website created to help a local skincare business present itself professionally and make booking easier.
+            </p>
+            <ul>
+              <li>Clear headline and service information</li>
+              <li>Simple contact and booking path</li>
+              <li>Professional presentation on mobile and desktop</li>
+            </ul>
+            <div class="hero-actions">
+              <a href="https://duluthskinspa.com" target="_blank" rel="noreferrer" class="btn btn-primary">Visit Example Site</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Simple Pricing</h2>
+            <p class="section-intro">
+              Straightforward pricing for a straightforward website.
+            </p>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <div class="mini-label">One-page website</div>
+            <div class="price">$300–$500</div>
+            <div class="price-sub">A clean, professional website for your local business.</div>
+            <ul>
+              <li>One-page website design</li>
+              <li>Mobile-friendly layout</li>
+              <li>Service and contact sections</li>
+              <li>Google-friendly structure</li>
+              <li>Simple launch process</li>
+            </ul>
+          </div>
+
+          <div class="pricing-card">
+            <div class="mini-label">Optional support</div>
+            <h3>Hosting and updates available</h3>
+            <p class="pricing-note">
+              Add simple hosting or ongoing updates if you want help keeping everything current and running smoothly.
+            </p>
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-secondary">Ask About Options</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>About Simplicity Sites</h2>
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card">
+            <h3>Built to be simple</h3>
+            <p class="about-text">
+              Simplicity Sites helps local service businesses show themselves professionally online without the cost and complexity of a big agency.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <h3>Hi, I’m Leo</h3>
+            <p class="about-text">
+              I build clean, focused websites that help small businesses make a great first impression when customers look them up online.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <div class="contact-grid">
+            <div>
+              <div class="mini-label">Get started</div>
+              <h2>Let’s Build Something Simple</h2>
+              <p class="contact-copy">
+                If you want a clean, professional website for your business, reach out and I’ll help you get started.
+              </p>
+            </div>
+
+            <div>
+              <div class="contact-list">
+                <div class="contact-item"><strong>Email:</strong> leo.w.smith@gmail.com</div>
+                <div class="contact-item"><strong>Phone:</strong> 651-600-0531</div>
+                <div class="contact-item"><strong>Best fit:</strong> local service businesses that want a simple, professional web presence</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Simplicity Sites</div>
+  </footer>
+</body>
+</html>
