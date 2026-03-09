@@ -422,6 +422,7 @@ form button {
   padding: 14px 20px;
   border-radius: 6px;
   cursor: pointer;
+  }
   </style>
 </head>
 <body>
@@ -663,33 +664,34 @@ form button {
                 If you want a clean, professional website for your business, reach out and I’ll help you get started.
               </p>
             </div>
-			<form name="contact" method="POST" data-netlify="true">
-  
-  <input type="hidden" name="form-name" value="contact">
+<form name="contact" method="POST" data-netlify="true">
 
-  <p>
-    <label>Your Name<br>
-    <input type="text" name="name" required></label>
-  </p>
+<input type="hidden" name="form-name" value="contact">
+<input type="hidden" name="redirect" value="/thank-you">
 
-  <p>
-    <label>Email<br>
-    <input type="email" name="email" required></label>
-  </p>
+<p>
+<label>Your Name<br>
+<input type="text" name="name" required></label>
+</p>
 
-  <p>
-    <label>Business Name<br>
-    <input type="text" name="business"></label>
-  </p>
+<p>
+<label>Email<br>
+<input type="email" name="email" required></label>
+</p>
 
-  <p>
-    <label>Message<br>
-    <textarea name="message" rows="4"></textarea></label>
-  </p>
+<p>
+<label>Business Name<br>
+<input type="text" name="business"></label>
+</p>
 
-  <p>
-    <button type="submit">Send Message</button>
-  </p>
+<p>
+<label>Message<br>
+<textarea name="message" rows="4"></textarea></label>
+</p>
+
+<p>
+<button type="submit">Send Message</button>
+</p>
 
 </form>
             <div>
