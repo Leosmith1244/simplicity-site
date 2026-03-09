@@ -404,6 +404,24 @@
       .btn { width: 100%; text-align: center; }
       .hero-actions { flex-direction: column; }
     }
+	form input,
+form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+form button {
+  background: #0a66c2;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 6px;
+  cursor: pointer;
   </style>
 </head>
 <body>
@@ -420,6 +438,7 @@
   </header>
 
   <main>
+  
     <section class="hero">
       <div class="container hero-grid">
         <div>
@@ -435,6 +454,7 @@
             <a href="#example" class="btn btn-primary">See an Example</a>
             <a href="#contact" class="btn btn-secondary">Contact Leo</a>
           </div>
+		  
         </div>
 
         <aside class="hero-card">
@@ -643,7 +663,35 @@
                 If you want a clean, professional website for your business, reach out and I’ll help you get started.
               </p>
             </div>
+			<form name="contact" method="POST" data-netlify="true">
+  
+  <input type="hidden" name="form-name" value="contact">
 
+  <p>
+    <label>Your Name<br>
+    <input type="text" name="name" required></label>
+  </p>
+
+  <p>
+    <label>Email<br>
+    <input type="email" name="email" required></label>
+  </p>
+
+  <p>
+    <label>Business Name<br>
+    <input type="text" name="business"></label>
+  </p>
+
+  <p>
+    <label>Message<br>
+    <textarea name="message" rows="4"></textarea></label>
+  </p>
+
+  <p>
+    <button type="submit">Send Message</button>
+  </p>
+
+</form>
             <div>
               <div class="contact-list">
                 <div class="contact-item"><strong>Email:</strong> leo.w.smith@gmail.com</div>
