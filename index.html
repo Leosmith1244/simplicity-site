@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Simplicity Sites</title>
+  <meta name="description" content="Simple professional one-page websites for local service businesses." />
   <style>
     :root {
       --bg: #f7f8f9;
@@ -67,6 +68,7 @@
       align-items: center;
       color: var(--muted);
       font-size: 0.95rem;
+      flex-wrap: wrap;
     }
 
     .btn {
@@ -134,7 +136,8 @@
     .card p,
     .about-text,
     .pricing-note,
-    .contact-copy {
+    .contact-copy,
+    .intake-copy {
       color: var(--muted);
       font-size: 1.05rem;
     }
@@ -151,7 +154,8 @@
     .pricing-card,
     .example-card,
     .about-card,
-    .contact-card {
+    .contact-card,
+    .intake-banner {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -344,6 +348,20 @@
     .about-card,
     .contact-card { padding: 30px; }
 
+    .intake-banner {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .intake-points {
+      margin: 18px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
     .price {
       font-size: 2.4rem;
       font-weight: 800;
@@ -375,6 +393,37 @@
       font-size: 0.95rem;
     }
 
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      margin-bottom: 14px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    form button {
+      background: #0a66c2;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .hero-prompt {
+      background: #eef5fb;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      display: inline-block;
+      margin: 6px 0 4px 0;
+    }
+
     @media (max-width: 900px) {
       .hero-grid,
       .two-panels,
@@ -382,7 +431,8 @@
       .example-card,
       .pricing-grid,
       .about-grid,
-      .contact-grid {
+      .contact-grid,
+      .intake-banner {
         grid-template-columns: 1fr;
       }
 
@@ -400,37 +450,11 @@
       .pricing-card,
       .example-copy,
       .about-card,
-      .contact-card { padding: 22px; }
+      .contact-card,
+      .intake-banner { padding: 22px; }
       .btn { width: 100%; text-align: center; }
       .hero-actions { flex-direction: column; }
     }
-	form input,
-form textarea {
-  width: 100%;
-  padding: 12px;
-  margin-top: 6px;
-  margin-bottom: 14px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-}
-
-form button {
-  background: #0a66c2;
-  color: white;
-  border: none;
-  padding: 14px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  }
-  .hero-prompt {
-  background: #eef5fb;
-  padding: 10px 14px;
-  border-radius: 8px;
-  font-weight: 600;
-  display: inline-block;
-  margin: 6px 0 4px 0;
-}
   </style>
 </head>
 <body>
@@ -440,33 +464,31 @@ form button {
       <nav class="nav-links">
         <a href="#example">Example</a>
         <a href="#pricing">Pricing</a>
-        <a href="#about">About</a>
+        <a href="intake.html">Intake</a>
         <a href="#contact" class="btn btn-primary">Get Started</a>
       </nav>
     </div>
   </header>
 
   <main>
-  
     <section class="hero">
       <div class="container hero-grid">
         <div>
-         <div class="eyebrow">Simple websites for local service businesses</div>
-<h1>When Customers Look You Up, Make a Great First Impression</h1>
-<p>
-  Simple professional websites that help local customers find you, trust you, and contact you easily.
-</p>
-<p class="hero-prompt">
-Search your business on Google. What do customers see?
-</p>
-<p>
-  Most customers search online before calling a business. A Simplicity Site helps you look professional and easy to contact.
-</p>
+          <div class="eyebrow">Simple websites for local service businesses</div>
+          <h1>When Customers Look You Up, Make a Great First Impression</h1>
+          <p>
+            Simple professional websites that help local customers find you, trust you, and contact you easily.
+          </p>
+          <p class="hero-prompt">
+            Search your business on Google. What do customers see?
+          </p>
+          <p>
+            Most customers search online before calling a business. A Simplicity Site helps you look professional and easy to contact.
+          </p>
           <div class="hero-actions">
             <a href="#example" class="btn btn-primary">See an Example</a>
-            <a href="#contact" class="btn btn-secondary">Contact Leo</a>
+            <a href="intake.html" class="btn btn-secondary">Open Intake Form</a>
           </div>
-		  
         </div>
 
         <aside class="hero-card">
@@ -479,6 +501,37 @@ Search your business on Google. What do customers see?
             <li><span>✓</span> Mobile-friendly layout</li>
           </ul>
         </aside>
+      </div>
+    </section>
+
+    <section id="intake-preview">
+      <div class="container">
+        <div class="intake-banner">
+          <div>
+            <div class="mini-label">Branded client intake</div>
+            <h2>Send clients to a polished questionnaire page</h2>
+            <p class="intake-copy">
+              Your new intake page matches the same clean Simplicity Sites style and collects everything you need for a fast website build.
+            </p>
+            <ul class="intake-points">
+              <li>Business details, services, ideal client, and site vibe</li>
+              <li>Logo and photo uploads</li>
+              <li>Booking link, testimonials, trust points, and domain preference</li>
+            </ul>
+            <div class="hero-actions">
+              <a href="intake.html" class="btn btn-primary">Go to Intake Page</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="mini-label">How to use it</div>
+            <h3>Upload both files to the same GitHub repo</h3>
+            <ul class="score-list">
+              <li><span>1</span> Keep this page as <strong>index.html</strong></li>
+              <li><span>2</span> Add the intake page as <strong>intake.html</strong></li>
+              <li><span>3</span> The buttons on this page will open the intake form automatically</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -675,40 +728,39 @@ Search your business on Google. What do customers see?
                 If you want a clean, professional website for your business, reach out and I’ll help you get started.
               </p>
             </div>
-<<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
 
-<input type="hidden" name="form-name" value="contact">
-<input type="hidden" name="redirect" value="/thank-you">
-<p hidden>
-<label>Don’t fill this out if you're human: <input name="bot-field"></label>
-</p>
-
-<p>
-<label>Your Name<br>
-<input type="text" name="name" required></label>
-</p>
-
-<p>
-<label>Email<br>
-<input type="email" name="email" required></label>
-</p>
-
-<p>
-<label>Business Name<br>
-<input type="text" name="business"></label>
-</p>
-
-<p>
-<label>Message<br>
-<textarea name="message" rows="4"></textarea></label>
-</p>
-
-<p>
-<button type="submit">Send Message</button>
-</p>
-
-</form>
             <div>
+              <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="contact">
+                <p hidden>
+                  <label>Don’t fill this out if you're human: <input name="bot-field"></label>
+                </p>
+
+                <p>
+                  <label>Your Name<br>
+                  <input type="text" name="name" required></label>
+                </p>
+
+                <p>
+                  <label>Email<br>
+                  <input type="email" name="email" required></label>
+                </p>
+
+                <p>
+                  <label>Business Name<br>
+                  <input type="text" name="business"></label>
+                </p>
+
+                <p>
+                  <label>Message<br>
+                  <textarea name="message" rows="4"></textarea></label>
+                </p>
+
+                <p>
+                  <button type="submit">Send Message</button>
+                </p>
+              </form>
+
               <div class="contact-list">
                 <div class="contact-item"><strong>Email:</strong> leo.w.smith@gmail.com</div>
                 <div class="contact-item"><strong>Phone:</strong> 651-600-0531</div>
