@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Simplicity Site Intake</title>
+  <style>
+    :root {
+      --navy: #17356b;
+      --navy-deep: #10264d;
+      --text: #1e2430;
+      --muted: #667085;
+      --line: #e7eaf0;
+      --bg: #f7f8fb;
+      --white: #ffffff;
+      --accent: #dfe8fb;
+      --shadow: 0 20px 60px rgba(16, 38, 77, 0.08);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f5f7fc 0%, #ffffff 22%, #ffffff 100%);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.82);
+      border-bottom: 1px solid rgba(23, 53, 107, 0.08);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 74px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand strong {
+      color: var(--navy);
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav a:hover { color: var(--navy); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: white;
+      box-shadow: 0 12px 28px rgba(23, 53, 107, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-deep);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--navy);
+      border-color: rgba(23, 53, 107, 0.14);
+    }
+
+    .hero {
+      padding: 72px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: rgba(223, 232, 251, 0.8);
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    h1 {
+      margin: 18px 0 16px;
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      color: var(--navy-deep);
+      max-width: 10ch;
+    }
+
+    .hero-copy p {
+      margin: 0 0 26px;
+      max-width: 58ch;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    .microproof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-card,
+    .form-shell,
+    .info-card,
+    .faq-card,
+    .footer-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 28px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .hero-card h3,
+    .section-head h2,
+    .info-card h3,
+    .faq-card h3 {
+      margin: 0;
+      letter-spacing: -0.03em;
+      color: var(--navy-deep);
+    }
+
+    .hero-list,
+    .faq-list,
+    .mini-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .hero-list li,
+    .mini-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: var(--text);
+    }
+
+    .bullet {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 8px;
+      background: var(--navy);
+      flex: 0 0 10px;
+    }
+
+    .section {
+      padding: 22px 0 84px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .form-shell {
+      padding: 24px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field,
+    .field-full {
+      display: grid;
+      gap: 9px;
+    }
+
+    .field-full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--navy-deep);
+      letter-spacing: -0.01em;
+    }
+
+    .optional {
+      font-weight: 500;
+      color: var(--muted);
+      margin-left: 4px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid #d8dfeb;
+      background: #fff;
+      border-radius: 16px;
+      padding: 15px 16px;
+      font: inherit;
+      color: var(--text);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: rgba(23, 53, 107, 0.55);
+      box-shadow: 0 0 0 4px rgba(23, 53, 107, 0.08);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 132px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: -2px;
+    }
+
+    .radio-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .choice {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid #d8dfeb;
+      border-radius: 18px;
+      padding: 14px 16px;
+      min-height: 62px;
+      background: #fff;
+    }
+
+    .choice input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      box-shadow: none;
+    }
+
+    .upload-note,
+    .privacy {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-top: 8px;
+      padding-top: 6px;
+    }
+
+    .form-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .below-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .info-card,
+    .faq-card,
+    .footer-card {
+      padding: 24px;
+    }
+
+    .info-card p,
+    .faq-card p,
+    .footer-card p {
+      color: var(--muted);
+      margin: 10px 0 0;
+    }
+
+    details {
+      border-top: 1px solid var(--line);
+      padding: 16px 0;
+    }
+
+    details:first-child { border-top: 0; }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--navy-deep);
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    footer {
+      padding: 0 0 38px;
+    }
+
+    .footer-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .required {
+      color: #b42318;
+      margin-left: 4px;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .below-grid,
+      .form-grid,
+      .radio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head,
+      .footer-card,
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      h1 { max-width: 13ch; }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding-top: 48px; }
+      .form-shell,
+      .hero-card,
+      .info-card,
+      .faq-card,
+      .footer-card { padding: 20px; }
+      .wrap { width: min(100% - 20px, 1120px); }
+      .btn { width: 100%; }
+      .hero-actions { display: grid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="#top" class="brand" aria-label="Super Simplicity Site Intake home">
+        <strong>Super Simplicity Sites</strong>
+        <span>Fast, clean, one-page websites</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#intake">Intake</a>
+        <a href="#process">Process</a>
+        <a href="#faq">FAQ</a>
+        <a href="#intake" class="btn btn-secondary">Start your intake</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Super Simplicity Site Intake</span>
+          <h1>Tell us once. We’ll build the rest.</h1>
+          <p>
+            Fill out this quick intake and we’ll turn your answers into a beautiful,
+            professional one-page website in the exact minimalist style you want.
+          </p>
+          <div class="hero-actions">
+            <a href="#intake" class="btn btn-primary">Start the questionnaire</a>
+            <a href="#process" class="btn btn-secondary">See how it works</a>
+          </div>
+          <div class="microproof">
+            <span>Estimated time: 7–10 minutes</span>
+            <span>Mobile-friendly</span>
+            <span>Files accepted</span>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="What you’ll submit">
+          <h3>What we’ll collect</h3>
+          <ul class="hero-list">
+            <li><span class="bullet"></span><span>Your business basics, service offer, and ideal client</span></li>
+            <li><span class="bullet"></span><span>Your vibe, branding, booking link, and preferred domain</span></li>
+            <li><span class="bullet"></span><span>Your best logo, photos, testimonials, and trust-building details</span></li>
+          </ul>
+          <a href="#intake" class="btn btn-primary">Complete intake now</a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="intake">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Your website questionnaire</h2>
+            <p>
+              Answer what you can. The more specific you are, the stronger your final site copy,
+              layout, and calls to action will be.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-shell">
+          <form name="site-intake" method="POST" data-netlify="true" netlify enctype="multipart/form-data">
+            <input type="hidden" name="form-name" value="site-intake" />
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="business-name">Business name<span class="required">*</span></label>
+                <input id="business-name" name="business-name" type="text" placeholder="Exact business name" required />
+              </div>
+
+              <div class="field">
+                <label for="tagline">Tagline or short slogan<span class="optional">optional</span></label>
+                <input id="tagline" name="tagline" type="text" placeholder="Short and memorable" />
+              </div>
+
+              <div class="field">
+                <label for="service-area">City / Area you serve<span class="required">*</span></label>
+                <input id="service-area" name="service-area" type="text" placeholder="Example: Tampa Bay, FL" required />
+              </div>
+
+              <div class="field">
+                <label for="phone">Phone number for the website<span class="required">*</span></label>
+                <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" required />
+              </div>
+
+              <div class="field">
+                <label for="email">Email address for the website<span class="required">*</span></label>
+                <input id="email" name="email" type="email" placeholder="you@business.com" required />
+              </div>
+
+              <div class="field">
+                <label for="domain">Preferred website name<span class="optional">optional</span></label>
+                <input id="domain" name="domain" type="text" placeholder="Example: sparkle-fleet.com" />
+              </div>
+
+              <div class="field-full">
+                <label for="main-offer">Main service / offer in one sentence<span class="required">*</span></label>
+                <textarea id="main-offer" name="main-offer" placeholder="Describe your core offer clearly and simply" required></textarea>
+              </div>
+
+              <div class="field-full">
+                <label for="services">Top 3–5 services or packages<span class="required">*</span></label>
+                <textarea id="services" name="services" placeholder="List one service per line" required></textarea>
+                <div class="hint">Example: Bridal facials / Membership package / Botox consultation</div>
+              </div>
+
+              <div class="field-full">
+                <label>What action do you want visitors to take?<span class="required">*</span></label>
+                <div class="radio-grid">
+                  <label class="choice"><input type="radio" name="primary-cta" value="Book appointment" required /> <span>Book appointment</span></label>
+                  <label class="choice"><input type="radio" name="primary-cta" value="Call you" /> <span>Call you</span></label>
+                  <label class="choice"><input type="radio" name="primary-cta" value="Request a quote" /> <span>Request a quote</span></label>
+                  <label class="choice"><input type="radio" name="primary-cta" value="Buy something" /> <span>Buy something</span></label>
+                  <label class="choice"><input type="radio" name="primary-cta" value="Not sure" /> <span>Not sure</span></label>
+                </div>
+              </div>
+
+              <div class="field-full">
+                <label>Do you want to show pricing on the site?<span class="required">*</span></label>
+                <div class="radio-grid">
+                  <label class="choice"><input type="radio" name="pricing" value="Show exact pricing" required /> <span>Show exact pricing</span></label>
+                  <label class="choice"><input type="radio" name="pricing" value="Show starting at pricing" /> <span>Show “starting at” pricing</span></label>
+                  <label class="choice"><input type="radio" name="pricing" value="Request a quote only" /> <span>Request a quote only</span></label>
+                  <label class="choice"><input type="radio" name="pricing" value="Not sure yet" /> <span>Not sure yet</span></label>
+                </div>
+              </div>
+
+              <div class="field-full">
+                <label for="ideal-client">Who is your ideal client?<span class="required">*</span></label>
+                <textarea id="ideal-client" name="ideal-client" placeholder="Describe the person or type of client you most want to attract" required></textarea>
+              </div>
+
+              <div class="field-full">
+                <label for="problem">What’s the #1 problem you solve for them?<span class="required">*</span></label>
+                <textarea id="problem" name="problem" placeholder="What pain point or result makes your offer valuable?" required></textarea>
+              </div>
+
+              <div class="field-full">
+                <label for="vibe">What 3 words describe the vibe you want for your site?<span class="required">*</span></label>
+                <input id="vibe" name="vibe" type="text" placeholder="Example: warm, premium, trustworthy" required />
+              </div>
+
+              <div class="field">
+                <label for="logo">Do you have a logo file?<span class="optional">optional</span></label>
+                <input id="logo" name="logo" type="file" accept="image/*,.pdf" />
+                <div class="upload-note">Images or PDF, up to 10 MB.</div>
+              </div>
+
+              <div class="field">
+                <label for="brand-colors">Any brand colors you already use?<span class="optional">optional</span></label>
+                <input id="brand-colors" name="brand-colors" type="text" placeholder="Hex codes or plain description" />
+              </div>
+
+              <div class="field-full">
+                <label for="photos">Photos of your work / team / location<span class="optional">optional</span></label>
+                <input id="photos" name="photos" type="file" accept="image/*" multiple />
+                <div class="upload-note">Upload your best 3–6 images, up to 10 MB each.</div>
+              </div>
+
+              <div class="field-full">
+                <label for="booking-link">Do you use Cal.com or Calendly for booking? If yes, what’s your link?<span class="optional">optional</span></label>
+                <input id="booking-link" name="booking-link" type="url" placeholder="https://cal.com/your-name or https://calendly.com/your-name" />
+              </div>
+
+              <div class="field-full">
+                <label for="special-fields">Any special form fields you want on the contact form?<span class="optional">optional</span></label>
+                <textarea id="special-fields" name="special-fields" placeholder="Example: event date, budget, preferred contact method"></textarea>
+              </div>
+
+              <div class="field-full">
+                <label for="testimonials">Any testimonials or Google reviews you want featured?<span class="optional">optional</span></label>
+                <textarea id="testimonials" name="testimonials" placeholder="Paste 1–3 testimonials or a Google review link"></textarea>
+              </div>
+
+              <div class="field-full">
+                <label for="trust">Anything that builds trust?<span class="optional">optional</span></label>
+                <textarea id="trust" name="trust" placeholder="Years in business, certifications, guarantees, awards, memberships, etc."></textarea>
+              </div>
+
+              <div class="field-full">
+                <label for="copy-help">Do you need help writing your website content?<span class="optional">optional</span></label>
+                <select id="copy-help" name="copy-help">
+                  <option value="">Select one</option>
+                  <option>Yes please</option>
+                  <option>No, I’ll provide it</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <div class="form-meta">
+                <span>Required fields are marked *</span>
+                <span>Submission goes straight to Netlify</span>
+              </div>
+              <button class="btn btn-primary" type="submit">Submit intake</button>
+            </div>
+
+            <p class="privacy">By submitting this form, you’re sharing the information needed to build your site draft and follow up with next steps.</p>
+          </form>
+        </div>
+
+        <div class="below-grid" id="process">
+          <div class="info-card">
+            <h3>What happens next</h3>
+            <ul class="mini-list">
+              <li><span class="bullet"></span><span>We review your answers, assets, and preferred call to action.</span></li>
+              <li><span class="bullet"></span><span>We write your site copy in a clean, modern one-page layout.</span></li>
+              <li><span class="bullet"></span><span>We send your draft fast so you can review, approve, and launch.</span></li>
+            </ul>
+          </div>
+
+          <div class="faq-card" id="faq">
+            <h3>Quick answers</h3>
+            <div class="faq-list">
+              <details open>
+                <summary>How long does this intake take?</summary>
+                <p>Most people finish in about 7 to 10 minutes, especially if they already have their logo and photos ready.</p>
+              </details>
+              <details>
+                <summary>What if I don’t have every answer yet?</summary>
+                <p>That’s fine. Fill in the required fields and add anything else you have. Missing pieces can be finalized later.</p>
+              </details>
+              <details>
+                <summary>Can I upload files here?</summary>
+                <p>Yes. The form includes uploads for logos and photos so everything stays organized in one place.</p>
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-card">
+        <div>
+          <strong>Super Simplicity Sites</strong>
+          <p>Minimalist intake design built to feel polished, premium, and easy to complete.</p>
+        </div>
+        <a href="#intake" class="btn btn-secondary">Back to form</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
