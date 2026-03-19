@@ -3,17 +3,532 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simplicity Sites</title>
-  <meta name="description" content="Clean, modern one-page websites for local service businesses." />
-  <link rel="stylesheet" href="styles.css" />
+  <title>Simplicity Sites | Professional One-Page Websites for Service Businesses</title>
+  <meta name="description" content="Simplicity Sites builds sharp, conversion-focused one-page websites for service businesses that need credibility, clarity, and more qualified leads." />
+  <style>
+    :root {
+      --navy: #142b55;
+      --navy-2: #0f2243;
+      --ink: #182230;
+      --muted: #617083;
+      --line: #dde4ee;
+      --bg: #f7f8fb;
+      --surface: #ffffff;
+      --soft: #eef3fb;
+      --soft-2: #f2f6fc;
+      --accent: #1e4f95;
+      --accent-2: #173f79;
+      --shadow: 0 18px 50px rgba(20, 43, 85, 0.08);
+      --radius: 18px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #f7f8fb 0%, #ffffff 25%, #ffffff 100%);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(20, 43, 85, 0.08);
+    }
+
+    .nav {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand strong {
+      font-size: 1rem;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .nav-links a:hover { color: var(--navy); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--navy);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(20, 43, 85, 0.16);
+    }
+
+    .btn-primary:hover { background: var(--navy-2); }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--navy);
+      border-color: rgba(20, 43, 85, 0.12);
+    }
+
+    section { padding: 86px 0; }
+
+    .hero {
+      padding: 72px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--navy);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      color: var(--navy-2);
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 5.8vw, 5.3rem);
+      max-width: 11ch;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      max-width: 16ch;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-copy > p {
+      font-size: 1.11rem;
+      color: var(--muted);
+      max-width: 58ch;
+      margin: 0 0 26px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .microproof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .microproof span {
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .microproof span::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--navy);
+      position: absolute;
+      left: 0;
+      top: 9px;
+    }
+
+    .card,
+    .hero-card,
+    .pricing-card,
+    .cta-band,
+    .contact-card,
+    .faq-card,
+    .proof-bar {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 30px;
+    }
+
+    .mini-label {
+      color: var(--accent);
+      text-transform: uppercase;
+      font-size: 0.79rem;
+      letter-spacing: 0.12em;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .hero-card p {
+      color: var(--muted);
+      margin: 12px 0 18px;
+    }
+
+    .check-list {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 22px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: var(--ink);
+    }
+
+    .check-list li::before {
+      content: "•";
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .proof-bar {
+      padding: 22px 26px;
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      align-items: center;
+    }
+
+    .proof-item strong {
+      display: block;
+      color: var(--navy-2);
+      font-size: 1.1rem;
+      margin-bottom: 2px;
+      letter-spacing: -0.02em;
+    }
+
+    .proof-item span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 56ch;
+      margin: 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      padding: 28px;
+    }
+
+    .kicker {
+      color: var(--accent);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .card p, .pricing-card p, .contact-card p, .faq-card p {
+      color: var(--muted);
+      margin: 12px 0 0;
+    }
+
+    .step-no {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: inline-grid;
+      place-items: center;
+      background: var(--soft);
+      color: var(--navy);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .comparison {
+      display: grid;
+      gap: 16px;
+    }
+
+    .comparison .card {
+      height: 100%;
+    }
+
+    .comparison .card.bad {
+      background: #fff6f4;
+    }
+
+    .comparison .card.good {
+      background: #f3f8ff;
+    }
+
+    .comparison ul {
+      margin: 18px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      padding: 30px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card.featured {
+      border-color: rgba(20, 43, 85, 0.25);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(20, 43, 85, 0.12);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--navy);
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .price {
+      font-size: 3rem;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: var(--navy-2);
+      margin: 12px 0 8px;
+      font-weight: 800;
+    }
+
+    .price-note {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .pricing-card ul {
+      margin: 18px 0 24px;
+      padding-left: 20px;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .pricing-card li { margin-bottom: 10px; }
+
+    .pricing-foot {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .cta-band {
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 18px;
+      margin-top: 30px;
+      background: linear-gradient(135deg, #ffffff 0%, #f4f7fc 100%);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .contact-card {
+      padding: 30px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .contact-list a, .contact-list div {
+      padding: 15px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .faq-card {
+      padding: 22px;
+    }
+
+    .faq-card h3 {
+      font-size: 1.12rem;
+    }
+
+    .faq-card p {
+      margin-top: 10px;
+      font-size: 0.98rem;
+    }
+
+    footer {
+      padding: 22px 0 44px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .split,
+      .grid-3,
+      .pricing-grid,
+      .contact-grid,
+      .proof-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-band,
+      .footer-inner,
+      .nav {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .pricing-card.featured { transform: none; }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links a:not(.btn) { display: none; }
+      .hero { padding-top: 50px; }
+      section { padding: 64px 0; }
+      .wrap { width: min(calc(100% - 20px), var(--max)); }
+      .btn { width: 100%; }
+      .hero-actions { display: grid; }
+      .cta-band { padding: 26px; }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
-    <div class="container nav">
-      <a href="#top" class="brand">Simplicity Sites <span>Simple sites that convert</span></a>
+    <div class="wrap nav">
+      <a href="#top" class="brand" aria-label="Simplicity Sites home">
+        <strong>Simplicity Sites</strong>
+        <span>One-page websites for service businesses</span>
+      </a>
       <nav class="nav-links" aria-label="Primary">
         <a href="#services">Services</a>
-        <a href="#about">About</a>
+        <a href="#process">Process</a>
+        <a href="#pricing">Pricing</a>
         <a href="intake.html">Intake</a>
         <a href="#contact" class="btn btn-secondary">Contact</a>
       </nav>
@@ -21,141 +536,275 @@
   </header>
 
   <main id="top">
-    <section class="hero-home">
-      <div class="container hero-home-grid">
-        <div>
-          <span class="eyebrow">One-page websites for local businesses</span>
-          <h1>Simple, clean websites that help you look legit fast.</h1>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Professional websites for local service businesses</div>
+          <h1>Websites built to make you look established, credible, and easy to hire.</h1>
           <p>
-            Simplicity Sites builds modern, focused websites for service businesses that want a professional online presence
-            without the agency drama, the tech overwhelm, or the giant price tag.
+            Simplicity Sites builds sharp one-page websites for service businesses that need more than a placeholder online presence. The goal is simple: help the right customer trust you faster and contact you sooner.
           </p>
           <div class="hero-actions">
-            <a href="intake.html" class="btn btn-primary">Start your intake</a>
-            <a href="#contact" class="btn btn-secondary">Contact Leo</a>
+            <a href="intake.html" class="btn btn-primary">Start your site</a>
+            <a href="#pricing" class="btn btn-secondary">View pricing</a>
           </div>
-          <div class="proof-row">
+          <div class="microproof">
             <span>Fast turnaround</span>
-            <span>Clean one-page layouts</span>
-            <span>Built for mobile</span>
+            <span>Clean strategic copy</span>
+            <span>Built for conversions</span>
           </div>
         </div>
 
-        <aside class="hero-panel">
-          <h3>What you get</h3>
-          <ul class="hero-list">
-            <li><span class="bullet"></span><span>A modern one-page site with clear calls to action</span></li>
-            <li><span class="bullet"></span><span>A branded intake form to collect what you need from clients</span></li>
-            <li><span class="bullet"></span><span>A fast, simple setup you can deploy on Netlify or GitHub</span></li>
+        <aside class="hero-card">
+          <div class="mini-label">What you actually get</div>
+          <h3>A focused website system, not a bloated custom-build process.</h3>
+          <p>
+            Everything is designed to give service businesses a professional online presence without agency drag, confusing tech, or slow timelines.
+          </p>
+          <ul class="check-list">
+            <li>A conversion-focused one-page website with clear calls to action</li>
+            <li>A branded intake flow that collects exactly what is needed to build the site</li>
+            <li>A professional structure you can launch quickly on GitHub or Netlify</li>
           </ul>
           <a href="intake.html" class="btn btn-primary">Open intake page</a>
         </aside>
       </div>
-    </section>
 
-    <section class="section" id="services">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>What Simplicity Sites does best</h2>
-            <p>Everything is built to feel easy, trustworthy, and focused on one clear next step.</p>
+      <div class="wrap">
+        <div class="proof-bar">
+          <div class="proof-item">
+            <strong>Clear positioning</strong>
+            <span>Say what you do in seconds</span>
           </div>
-        </div>
-
-        <div class="offer-grid">
-          <article class="offer-card">
-            <div class="mini-label">01</div>
-            <h3>Simple service websites</h3>
-            <p>Clean one-page websites that make local businesses look polished and easy to trust.</p>
-          </article>
-          <article class="offer-card">
-            <div class="mini-label">02</div>
-            <h3>Branded intake systems</h3>
-            <p>Professional forms that capture client info, assets, testimonials, and booking details in one place.</p>
-          </article>
-          <article class="offer-card">
-            <div class="mini-label">03</div>
-            <h3>Fast launch setup</h3>
-            <p>GitHub-ready files, Netlify-friendly forms, and a structure you can reuse again and again.</p>
-          </article>
+          <div class="proof-item">
+            <strong>Authority-first design</strong>
+            <span>Look polished and competent</span>
+          </div>
+          <div class="proof-item">
+            <strong>Lead-focused structure</strong>
+            <span>Guide visitors to act</span>
+          </div>
+          <div class="proof-item">
+            <strong>Fast deployment</strong>
+            <span>Simple files, easy launch</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="about">
-      <div class="container">
+    <section id="services">
+      <div class="wrap">
         <div class="section-head">
           <div>
-            <h2>About Simplicity Sites</h2>
+            <h2>Built for service businesses that need results, not complexity.</h2>
+            <p class="section-intro">
+              Every page is structured to make your business feel more trustworthy, more established, and easier to contact. No clutter. No fluff. No giant site map nobody needs.
+            </p>
           </div>
         </div>
 
-        <div class="about-grid">
-          <article class="about-card">
-            <h3>Built to be simple</h3>
-            <p>
-              Simplicity Sites helps local service businesses show themselves professionally online without the cost and complexity of a big agency.
-            </p>
-          </article>
-
-          <article class="about-card">
-            <h3>Hi, I’m Leo</h3>
-            <p>
-              I build clean, focused websites that help small businesses make a great first impression when customers look them up online.
-            </p>
-          </article>
+        <div class="grid-3">
+          <div class="card">
+            <div class="kicker">01</div>
+            <h3>Conversion-focused layout</h3>
+            <p>Your headline, service blocks, trust signals, and calls to action are all organized to move visitors toward contacting you.</p>
+          </div>
+          <div class="card">
+            <div class="kicker">02</div>
+            <h3>Strategic one-page structure</h3>
+            <p>Everything important lives on one sharp page so customers can understand your offer quickly without hunting for basic information.</p>
+          </div>
+          <div class="card">
+            <div class="kicker">03</div>
+            <h3>Clean launch-ready system</h3>
+            <p>You get a professional site setup that is straightforward to deploy, edit, and reuse without becoming dependent on bloated tools.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="contact-card">
-          <div class="contact-grid">
+    <section id="process">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>A simple process that still feels high-end.</h2>
+            <p class="section-intro">
+              This is built to be efficient without feeling cheap. You provide the essentials once, then the site gets structured around clarity, trust, and lead generation.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="step-no">1</div>
+            <h3>Complete the intake</h3>
+            <p>Fill out the branded intake form with your services, contact details, photos, brand direction, and ideal client.</p>
+          </div>
+          <div class="card">
+            <div class="step-no">2</div>
+            <h3>We shape the messaging</h3>
+            <p>Your answers turn into site copy, trust sections, service positioning, and the core calls to action on the page.</p>
+          </div>
+          <div class="card">
+            <div class="step-no">3</div>
+            <h3>Review and launch</h3>
+            <p>You review the finished page, request final edits, and publish fast with a structure that looks far more expensive than it is.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split">
+        <div>
+          <div class="section-head">
             <div>
-              <div class="mini-label">Get started</div>
-              <h2 class="section-title">Get a simple website for your business</h2>
-              <p class="contact-copy">
-                If you want a clean, professional website for your business, reach out and I’ll help you get started.
+              <h2>The difference between “having a site” and having the right site.</h2>
+              <p class="section-intro">
+                Most service businesses do not need a giant website. They need a site that answers the right questions fast and makes taking the next step obvious.
               </p>
             </div>
+          </div>
 
-            <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-              <input type="hidden" name="form-name" value="contact" />
-              <input type="hidden" name="redirect" value="/thank-you.html" />
-              <p hidden>
-                <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-              </p>
+          <div class="comparison">
+            <div class="card bad">
+              <h3>What weak sites usually do</h3>
+              <ul>
+                <li>Feel generic or outdated</li>
+                <li>Hide the offer behind vague copy</li>
+                <li>Bury the phone number or next step</li>
+                <li>Create doubt instead of confidence</li>
+              </ul>
+            </div>
+            <div class="card good">
+              <h3>What Simplicity Sites is built to do</h3>
+              <ul>
+                <li>Clarify your offer quickly</li>
+                <li>Show your business as polished and credible</li>
+                <li>Guide visitors toward booking, calling, or requesting a quote</li>
+                <li>Make your business easier to trust on mobile and desktop</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-              <div class="form-row">
-                <label for="contact-name">Your Name</label>
-                <input id="contact-name" type="text" name="name" required />
-              </div>
+        <div class="card">
+          <div class="mini-label">Why this works</div>
+          <h3>Customers decide fast.</h3>
+          <p>
+            When someone lands on your website, they are not looking for clever design tricks. They are scanning for signals that say:
+          </p>
+          <ul class="check-list">
+            <li>This business looks legitimate</li>
+            <li>They clearly do what I need</li>
+            <li>I know what to do next</li>
+          </ul>
+          <p>
+            That is the entire philosophy behind Simplicity Sites. Clean structure. Strong positioning. One obvious next step.
+          </p>
+        </div>
+      </div>
+    </section>
 
-              <div class="form-row">
-                <label for="contact-email">Email</label>
-                <input id="contact-email" type="email" name="email" required />
-              </div>
+    <section id="pricing">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Pricing designed to feel easy to say yes to.</h2>
+            <p class="section-intro">
+              Clear packages. Clear deliverables. No mystery pricing. Start simple, or choose the option that gives you a more polished sales asset from day one.
+            </p>
+          </div>
+        </div>
 
-              <div class="form-row">
-                <label for="contact-business">Business Name</label>
-                <input id="contact-business" type="text" name="business" />
-              </div>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <div class="badge">Starter</div>
+            <h3>Authority Launch</h3>
+            <div class="price">$500</div>
+            <div class="price-note">For businesses that need a clean, credible web presence fast.</div>
+            <ul>
+              <li>One-page website</li>
+              <li>Headline, services, and contact sections</li>
+              <li>Mobile-optimized layout</li>
+              <li>Basic contact form</li>
+              <li>GitHub / Netlify-ready files</li>
+            </ul>
+            <a href="intake.html" class="btn btn-secondary">Start with Starter</a>
+          </div>
 
-              <div class="form-row">
-                <label for="contact-message">Message</label>
-                <textarea id="contact-message" name="message" rows="4"></textarea>
-              </div>
+          <div class="pricing-card featured">
+            <div class="badge">Most popular</div>
+            <h3>Professional Growth</h3>
+            <div class="price">$800</div>
+            <div class="price-note">For businesses that want stronger messaging and a more complete conversion setup.</div>
+            <ul>
+              <li>Everything in Starter</li>
+              <li>Refined copywriting support</li>
+              <li>Branded intake page</li>
+              <li>Trust-building sections and FAQs</li>
+              <li>Stronger lead-focused structure</li>
+              <li>Launch support and polish pass</li>
+            </ul>
+            <a href="intake.html" class="btn btn-primary">Choose Growth</a>
+          </div>
 
-              <button type="submit" class="btn btn-primary">Send message</button>
-            </form>
+          <div class="pricing-card">
+            <div class="badge">Premium</div>
+            <h3>Operator Package</h3>
+            <div class="price">$1,200</div>
+            <div class="price-note">For businesses that want a sharper brand presentation and a stronger client-facing asset.</div>
+            <ul>
+              <li>Everything in Growth</li>
+              <li>Priority turnaround</li>
+              <li>Higher-end visual polish</li>
+              <li>Expanded trust and proof sections</li>
+              <li>Custom calls to action and booking flow</li>
+              <li>More hands-on revision support</li>
+            </ul>
+            <a href="intake.html" class="btn btn-secondary">Go premium</a>
+          </div>
+        </div>
 
-            <div>
-              <div class="contact-list">
-                <div><strong>Email:</strong> leo.w.smith@gmail.com</div>
-                <div><strong>Phone:</strong> 651-600-0531</div>
-                <div><strong>Best fit:</strong> local service businesses that want a simple, professional web presence</div>
-              </div>
+        <div class="cta-band">
+          <div>
+            <h3>Not sure which package fits?</h3>
+            <p class="section-intro">Start with the intake. Once the scope is clear, the right package becomes obvious and the project moves much faster.</p>
+          </div>
+          <a href="intake.html" class="btn btn-primary">Complete the intake</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap contact-grid">
+        <div class="contact-card">
+          <div class="mini-label">Contact</div>
+          <h2>Ready to look more established online?</h2>
+          <p>
+            The fastest path is simple: complete the intake and get the details into one place. That makes it easier to build the site quickly and correctly the first time.
+          </p>
+          <div class="contact-list">
+            <a href="intake.html">Open the intake form</a>
+            <div>Email: leo@example.com</div>
+            <div>Service: One-page sites for local service businesses</div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="mini-label">FAQ</div>
+          <div class="faq-list">
+            <div class="faq-card">
+              <h3>Who is this best for?</h3>
+              <p>Local service businesses, solo operators, and small teams that need a focused website that builds trust and drives inquiries.</p>
+            </div>
+            <div class="faq-card">
+              <h3>Do I need to provide all the copy?</h3>
+              <p>No. The intake gathers what is needed, and the stronger packages include more support shaping the messaging.</p>
+            </div>
+            <div class="faq-card">
+              <h3>Can this be launched without a complicated platform?</h3>
+              <p>Yes. The structure is intentionally simple so it can be deployed cleanly on GitHub Pages or Netlify.</p>
             </div>
           </div>
         </div>
@@ -163,16 +812,11 @@
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-card">
-      <div>
-        <strong>Simplicity Sites</strong>
-        <p>Minimal design. Clear offers. Faster launches.</p>
-      </div>
-      <a href="intake.html" class="btn btn-secondary">Go to intake</a>
+  <footer>
+    <div class="wrap footer-inner">
+      <div>Simplicity Sites</div>
+      <div>Clean websites that help service businesses look credible and convert better.</div>
     </div>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
